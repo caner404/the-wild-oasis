@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import Button from '../../../ui/Button';
-import Form from '../../../ui/Form';
+import Button from '../../../ui/Button/Button';
+import Form from '../../../ui/Form/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 

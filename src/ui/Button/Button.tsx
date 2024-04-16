@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled, { RuleSet, css } from 'styled-components';
 
-const sizes = {
+const sizes: { [key in ButtonSize]: RuleSet<object> } = {
   small: css`
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
@@ -20,7 +20,7 @@ const sizes = {
   `,
 };
 
-const variations = {
+const variations: { [key in ButtonVariation]: RuleSet<object> } = {
   primary: css`
     color: var(--color-brand-50);
     background-color: var(--color-brand-600);
@@ -47,3 +47,28 @@ const variations = {
     }
   `,
 };
+
+export enum ButtonVariation {
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  DANGER = 'danger',
+}
+export enum ButtonSize {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+}
+
+interface ButtonProps {
+  readonly variation?: ButtonVariation;
+  readonly size?: ButtonSize;
+}
+
+export const Button = styled.button<ButtonProps>`
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+
+  ${({ size = ButtonSize.MEDIUM }) => sizes[size]}
+  ${({ variation = ButtonVariation.PRIMARY }) => variations[variation]}
+`;
