@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-import Input from '../../ui/Input';
-import Form from '../../ui/Form/Form';
-import Button from '../../ui/Button/Button';
-import FileInput from '../../ui/Form/FileInput';
-import Textarea from '../../ui/Form/Textarea';
+import { Input, Form, FileInput, Textarea } from '@/ui/Form';
+
+import { Button, ButtonVariation } from '@/ui/Button';
 
 const FormRow = styled.div`
   display: grid;
@@ -42,7 +40,7 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function CreateCabinForm() {
+export function CreateCabinForm() {
   return (
     <Form>
       <FormRow>
@@ -98,7 +96,7 @@ function CreateCabinForm() {
       <FormRow>
         {/* type is an HTML attribute! */}
         <Button
-          variation='secondary'
+          variation={ButtonVariation.SECONDARY}
           type='reset'
         >
           Cancel
