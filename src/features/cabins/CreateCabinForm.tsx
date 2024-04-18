@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { Input, Form, FileInput, Textarea } from '@/ui/Form';
 
 import { Button, ButtonVariation } from '@/ui/Button';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createCabin } from './api/apiCabins';
+import toast from 'react-hot-toast';
+import { Cabin } from './type/Cabin';
 
 const FormRow = styled.div`
   display: grid;
@@ -41,13 +46,30 @@ const Error = styled.span`
 `;
 
 export function CreateCabinForm() {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading: isCreating } = useMutation({
+    mutationFn: createCabin,
+    onSuccess: () => {
+      toast.success('new cabin succesfully created');
+      queryClient.invalidateQueries({ queryKey: ['cabins'] });
+      reset();
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const { register, handleSubmit, reset } = useForm();
+
+  function onSubmit(data: Partial<Cabin>) {
+    mutate(data);
+  }
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
         <Label htmlFor='name'>Cabin name</Label>
         <Input
           type='text'
           id='name'
+          {...register('name')}
         />
       </FormRow>
 
@@ -56,6 +78,7 @@ export function CreateCabinForm() {
         <Input
           type='number'
           id='maxCapacity'
+          {...register('maxCapacity')}
         />
       </FormRow>
 
@@ -64,6 +87,7 @@ export function CreateCabinForm() {
         <Input
           type='number'
           id='regularPrice'
+          {...register('regularPrice')}
         />
       </FormRow>
 
@@ -72,6 +96,7 @@ export function CreateCabinForm() {
         <Input
           type='number'
           id='discount'
+          {...register('discount')}
           defaultValue={0}
         />
       </FormRow>
@@ -79,8 +104,8 @@ export function CreateCabinForm() {
       <FormRow>
         <Label htmlFor='description'>Description for website</Label>
         <Textarea
-          type='number'
           id='description'
+          {...register('description')}
           defaultValue=''
         />
       </FormRow>
@@ -101,7 +126,7 @@ export function CreateCabinForm() {
         >
           Cancel
         </Button>
-        <Button>Edit cabin</Button>
+        <Button disabled={isCreating}>Edit cabin</Button>
       </FormRow>
     </Form>
   );
