@@ -3,7 +3,7 @@ import { FileInput, Form, FormRow, Input, Textarea } from '@/ui/Form';
 import { Button, ButtonVariation } from '@/ui/Button';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { useCreateCabin } from './hooks/useCreateCabin';
-import { useEditCabin } from './hooks/useEditCabin';
+import { useUpdateCabin } from './hooks/useUpdateCabin';
 import { Cabin } from './type/Cabin';
 
 type BaseCabinFormData = {
@@ -33,8 +33,8 @@ export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
   const isEditMode =
     editCabin !== undefined ? { isEditSession: true, id: editCabin.id } : { isEditSession: false, id: undefined };
   const { isCreating, createCabin } = useCreateCabin();
-  const { isEditing, editCabinFn } = useEditCabin();
-  const isWorking = isCreating || isEditing;
+  const { isUpdating, updateCabin } = useUpdateCabin();
+  const isWorking = isCreating || isUpdating;
 
   const {
     register,
@@ -48,7 +48,7 @@ export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
 
   function onSubmit(data: CabinFormData | EditFormData) {
     if (isEditMode.isEditSession)
-      editCabinFn({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
+      updateCabin({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
     createCabin({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
   }
 
