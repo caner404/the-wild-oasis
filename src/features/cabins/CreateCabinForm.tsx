@@ -1,10 +1,9 @@
 import { FileInput, Form, FormRow, Input, Textarea } from '@/ui/Form';
 
 import { Button, ButtonVariation } from '@/ui/Button';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FieldErrors, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { createEditCabin } from './api/apiCabins';
+import { useCreateCabin } from './hooks/useCreateCabin';
+import { useEditCabin } from './hooks/useEditCabin';
 import { Cabin } from './type/Cabin';
 
 type BaseCabinFormData = {
@@ -23,37 +22,19 @@ export type EditFormData = BaseCabinFormData & {
 
 const defaultValues: CabinFormData = {
   description: '',
-  discount: 0,
+  discount: null!,
   image: {} as FileList,
-  maxCapacity: 0,
+  maxCapacity: null!,
   name: '',
-  regularPrice: 0,
+  regularPrice: null!,
 };
 
 export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
   const isEditMode =
     editCabin !== undefined ? { isEditSession: true, id: editCabin.id } : { isEditSession: false, id: undefined };
-
-  const queryClient = useQueryClient();
-  const { mutate: createCabin, isLoading: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success('new cabin succesfully created');
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-      reset();
-    },
-    onError: (err: Error) => toast.error(err.message),
-  });
-
-  const { mutate: editCabinFn } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success('Cabin succesfuuly updated');
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-      reset();
-    },
-    onError: (err: Error) => toast.error(err.message),
-  });
+  const { isCreating, createCabin } = useCreateCabin();
+  const { isEditing, editCabinFn } = useEditCabin();
+  const isWorking = isCreating || isEditing;
 
   const {
     register,
@@ -66,8 +47,9 @@ export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
   });
 
   function onSubmit(data: CabinFormData | EditFormData) {
-    if (isEditMode.isEditSession) editCabinFn({ newCabin: { ...data }, id: isEditMode.id });
-    createCabin({ newCabin: { ...data }, id: isEditMode.id });
+    if (isEditMode.isEditSession)
+      editCabinFn({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
+    createCabin({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
   }
 
   function onError(errors: FieldErrors<CabinFormData | EditFormData>) {
@@ -154,7 +136,7 @@ export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
         >
           Cancel
         </Button>
-        <Button disabled={isCreating}>{isEditMode.isEditSession ? 'Edit cabin' : 'Add cabin'}</Button>
+        <Button disabled={isWorking}>{isEditMode.isEditSession ? 'Edit cabin' : 'Add cabin'}</Button>
       </FormRow>
     </Form>
   );
