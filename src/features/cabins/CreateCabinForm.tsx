@@ -29,7 +29,7 @@ const defaultValues: CabinFormData = {
   regularPrice: null!,
 };
 
-export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
+export function CreateCabinForm({ editCabin, onClose }: { editCabin?: Cabin; onClose?: () => void }) {
   const isEditMode =
     editCabin !== undefined ? { isEditSession: true, id: editCabin.id } : { isEditSession: false, id: undefined };
   const { isCreating, createCabin } = useCreateCabin();
@@ -50,13 +50,17 @@ export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
     if (isEditMode.isEditSession)
       updateCabin({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
     createCabin({ newCabin: { ...data }, id: isEditMode.id }, { onSuccess: () => reset() });
+    onClose?.(); //dont call this method if onClose is not passed to the component
   }
 
   function onError(errors: FieldErrors<CabinFormData | EditFormData>) {
     console.log(errors);
   }
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onClose ? 'modal' : 'regular'}
+    >
       <FormRow
         error={errors.name?.message}
         label='Name'
@@ -133,6 +137,7 @@ export function CreateCabinForm({ editCabin }: { editCabin?: Cabin }) {
         <Button
           variation={ButtonVariation.SECONDARY}
           type='reset'
+          onClick={() => onClose?.()}
         >
           Cancel
         </Button>

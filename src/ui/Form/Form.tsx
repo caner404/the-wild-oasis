@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const Form = styled.form`
+interface FormProps {
+  readonly type?: string;
+}
+
+export const Form = styled.form<FormProps>`
   ${(props) =>
     props.type !== 'modal' &&
     css`
@@ -21,3 +25,7 @@ export const Form = styled.form`
   overflow: hidden;
   font-size: 1.4rem;
 `;
+
+Form.defaultProps = {
+  type: 'regular',
+};
