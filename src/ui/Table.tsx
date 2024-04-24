@@ -110,6 +110,7 @@ interface TableBodyProps<T> {
   render: (value: T) => JSX.Element;
 }
 function Body<T>({ data, render }: TableBodyProps<T>) {
+  if (!data.length) <Empty>Nothing to show at the moment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
