@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from './Button/Button';
-import Heading from './Layout/Heading';
+import { Heading } from './Layout';
+import { Button, ButtonVariation } from './Button';
 
 const StyledConfirmDelete = styled.div`
   width: 40rem;
@@ -20,7 +20,17 @@ const StyledConfirmDelete = styled.div`
   }
 `;
 
-function ConfirmDelete({ resourceName, onConfirm, disabled }) {
+function ConfirmDelete({
+  resourceName,
+  onConfirm,
+  disabled,
+  onClose,
+}: {
+  resourceName: string;
+  disabled: boolean;
+  onConfirm: () => void;
+  onClose?: () => void;
+}) {
   return (
     <StyledConfirmDelete>
       <Heading as='h3'>Delete {resourceName}</Heading>
@@ -28,14 +38,16 @@ function ConfirmDelete({ resourceName, onConfirm, disabled }) {
 
       <div>
         <Button
-          variation='secondary'
+          variation={ButtonVariation.SECONDARY}
           disabled={disabled}
+          onClick={onClose}
         >
           Cancel
         </Button>
         <Button
-          variation='danger'
+          variation={ButtonVariation.DANGER}
           disabled={disabled}
+          onClick={onConfirm}
         >
           Delete
         </Button>

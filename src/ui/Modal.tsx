@@ -1,4 +1,4 @@
-import {
+import React, {
   Dispatch,
   PropsWithChildren,
   ReactElement,
@@ -49,12 +49,17 @@ function Window({ children, name }: PropsWithChildren<WindowProps>) {
 
   if (name !== openName) return null;
   return createPortal(
-    <Overlay onClick={close}>
+    <Overlay
+      onClick={(e: React.MouseEvent) => {
+        const targetElement = e.target as HTMLElement;
+        if (targetElement === e.currentTarget) close();
+      }}
+    >
       <StyledModal>
         <Button>
           <HiXMark />
         </Button>
-        {cloneElement(children as ReactElement, {onClose: close})}
+        {cloneElement(children as ReactElement, { onClose: close })}
       </StyledModal>
     </Overlay>,
     document.body
