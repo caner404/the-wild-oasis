@@ -60,8 +60,8 @@ export enum ButtonSize {
 }
 
 interface ButtonProps {
-  readonly variation?: ButtonVariation;
-  readonly size?: ButtonSize;
+  readonly $variation?: ButtonVariation;
+  readonly $size?: ButtonSize;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -69,6 +69,6 @@ export const Button = styled.button<ButtonProps>`
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
-  ${({ size = ButtonSize.MEDIUM }) => sizes[size]}
-  ${({ variation = ButtonVariation.PRIMARY }) => variations[variation]}
+  ${({ $size = ButtonSize.MEDIUM }) => sizes[$size]}
+  ${({ $variation = ButtonVariation.PRIMARY }) => variations[$variation]}
 `;

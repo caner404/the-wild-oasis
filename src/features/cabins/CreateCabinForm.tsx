@@ -135,7 +135,7 @@ export function CreateCabinForm({ editCabin, onClose }: { editCabin?: Cabin; onC
       <FormRow>
         {/* type is an HTML attribute! */}
         <Button
-          variation={ButtonVariation.SECONDARY}
+          $variation={ButtonVariation.SECONDARY}
           type='reset'
           onClick={() => onClose?.()}
         >
