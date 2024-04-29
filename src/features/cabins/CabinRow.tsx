@@ -1,7 +1,7 @@
 import ConfirmDelete from '@/ui/ConfirmDelete';
 import Menus from '@/ui/Menus';
 import Modal from '@/ui/Modal';
-import Table from '@/ui/Table';
+import Table from '@/ui/table/Table';
 import { formatCurrency } from '@/utils/helpers';
 import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
 import styled from 'styled-components';
