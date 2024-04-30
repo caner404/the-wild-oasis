@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
 
-import Tag from '../../ui/Tag';
-import Table from '../../ui/table/Table';
-
 import { formatCurrency } from '../../utils/helpers';
 import { formatDistanceFromNow } from '../../utils/helpers';
+import Table from '@/ui/table/Table';
+import Tag from '@/ui/Tag';
+
+import { Booking, BookingStatus } from './type/Booking';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -34,24 +35,23 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
+export function BookingRow({
   booking: {
-    id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
+    Guests: { fullName: guestName, email },
+    Cabins: { name: cabinName },
   },
+}: {
+  booking: Booking;
 }) {
-  const statusToTagName = {
-    unconfirmed: 'blue',
-    'checked-in': 'green',
-    'checked-out': 'silver',
+  const statusToTagName: { [key in BookingStatus]: string } = {
+    [BookingStatus.UNCONFIRMED]: 'blue',
+    [BookingStatus.CHECKED_IN]: 'green',
+    [BookingStatus.CHECKED_OUT]: 'silver',
   };
 
   return (
@@ -72,11 +72,9 @@ function BookingRow({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
+      <Tag $type={statusToTagName[status]}>{status.toString().replace('-', ' ')}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
     </Table.Row>
   );
 }
-
-export default BookingRow;

@@ -1,13 +1,19 @@
-import BookingRow from './BookingRow';
-import Table from '../../ui/table/Table';
-import Menus from '../../ui/Menus';
+import Empty from '@/ui/Empty';
+import Menus from '@/ui/Menus';
+import Spinner from '@/ui/Spinner';
+import Table from '@/ui/table/Table';
+import { useBookings } from './hooks/useBookings';
+import { BookingRow } from './BookingRow';
 
-function BookingTable() {
-  const bookings = [];
+export function BookingTable() {
+  const { isLoading, bookings } = useBookings();
+
+  if (bookings === undefined || !bookings.length) return <Empty resource='bookings' />;
+  if (isLoading) return <Spinner />;
 
   return (
-    <Menus>
-      <Table columns='0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem'>
+    <Menus.Root>
+      <Table.Root columns='0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem'>
         <Table.Header>
           <div>Cabin</div>
           <div>Guest</div>
@@ -26,9 +32,7 @@ function BookingTable() {
             />
           )}
         />
-      </Table>
-    </Menus>
+      </Table.Root>
+    </Menus.Root>
   );
 }
-
-export default BookingTable;

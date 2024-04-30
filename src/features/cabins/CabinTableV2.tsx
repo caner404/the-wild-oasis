@@ -5,6 +5,7 @@ import { useCabins } from './hooks/useCabins';
 import { Cabin } from './type/Cabin';
 import Menus from '@/ui/Menus';
 import { useSearchParams } from 'react-router-dom';
+import Empty from '@/ui/Empty';
 
 export function CabinTable() {
   const { isLoading, cabins } = useCabins();
@@ -29,6 +30,7 @@ export function CabinTable() {
   const fieldKey: CabinKey = field as CabinKey;
   const sortedCabins = filteredCabins.sort((a, b) => (Number(a[fieldKey]) - Number(b[fieldKey])) * modifier);
 
+  if (cabins === undefined || !cabins.length) return <Empty resource='bookings' />;
   return (
     <Menus.Root>
       <Table.Root columns=' 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr'>
