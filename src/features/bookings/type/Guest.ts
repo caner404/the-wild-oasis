@@ -4,6 +4,6 @@ export type Guest = {
   fullName: string;
   email: string;
   nationality: string;
-  nationalId: string;
+  nationalID: string;
   countryFlag: string;
 };

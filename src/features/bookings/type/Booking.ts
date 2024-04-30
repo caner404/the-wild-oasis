@@ -15,6 +15,8 @@ export type Booking = {
   hasBreakfast: boolean;
   isPaid: boolean;
   observations: string;
+  cabinId: number;
+  guestId: number;
   Cabins: Cabin;
   Guests: Guest;
 };

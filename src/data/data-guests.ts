@@ -1,6 +1,8 @@
 // Search for: 'jo', 'fa', 'mar', 'emm', 'ah'
 
-export const guests = [
+import { Guest } from '@/features/bookings/type/Guest';
+
+export const guests: Partial<Guest>[] = [
   {
     // id: 1000,
     fullName: 'Jonas Schmedtmann',
