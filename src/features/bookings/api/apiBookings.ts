@@ -2,10 +2,22 @@ import supabase from '@/services/supabase';
 import { getToday } from '@/utils/helpers';
 import { Booking } from '../type/Booking';
 
-export async function getBookings(): Promise<Booking[]> {
-  const { data, error } = await supabase.from('Bookings').select('*,Cabins(*),Guests(*)');
+export type BookingsParams = {
+  filter: { field: string; value: string | number } | null;
+};
+
+export async function getBookings({ filter = null }: BookingsParams): Promise<Booking[]> {
+  let query = supabase.from('Bookings').select('*,Cabins(*),Guests(*)');
   //const { data, error } = await supabase.from('Bookings').select('*,Cabins(name),Guests(fullName,email)');
 
+  //FILTER
+  if (filter !== null) {
+    query = query.eq(filter.field, filter.value);
+  }
+
+  // SORTING
+
+  const { data, error } = await query;
   if (error) {
     console.error(error);
     throw new Error('Bookings could not be loaded');
