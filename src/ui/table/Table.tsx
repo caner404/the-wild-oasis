@@ -119,4 +119,5 @@ export default {
   Header,
   Row,
   Body,
+  Footer,
 };
