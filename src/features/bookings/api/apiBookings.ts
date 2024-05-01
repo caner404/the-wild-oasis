@@ -1,14 +1,20 @@
 import supabase from '@/services/supabase';
 import { getToday } from '@/utils/helpers';
 import { Booking } from '../type/Booking';
+import { PAGE_SIZE } from '@/utils/constants';
 
 export type BookingsParams = {
   filter: { field: string; value: string | number } | null;
   sortBy: { field: string; direction: string } | null;
+  pagination: number;
 };
 
-export async function getBookings({ filter = null, sortBy = null }: BookingsParams): Promise<Booking[]> {
-  let query = supabase.from('Bookings').select('*,Cabins(*),Guests(*)');
+export async function getBookings({
+  filter = null,
+  sortBy = null,
+  pagination = 1,
+}: BookingsParams): Promise<{ data: Booking[]; count: number | null }> {
+  let query = supabase.from('Bookings').select('*,Cabins(*),Guests(*)', { count: 'exact' });
   //const { data, error } = await supabase.from('Bookings').select('*,Cabins(name),Guests(fullName,email)');
 
   //FILTER
@@ -21,13 +27,20 @@ export async function getBookings({ filter = null, sortBy = null }: BookingsPara
     query = query.order(sortBy.field, { ascending: sortBy.direction === 'asc' });
   }
 
-  const { data, error } = await query;
+  // Pagination
+  if (pagination) {
+    const from = (pagination - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
   if (error) {
     console.error(error);
     throw new Error('Bookings could not be loaded');
   }
 
-  return data;
+  return { data, count };
 }
 
 export async function getBooking(id: number) {

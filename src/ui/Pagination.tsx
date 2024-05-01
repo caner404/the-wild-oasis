@@ -1,3 +1,4 @@
+import { PAGE_SIZE } from '@/utils/constants';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -57,7 +58,6 @@ const PaginationButton = styled.button<{ $active: boolean }>`
   }
 `;
 
-const PAGE_SIZE = 10;
 export function Pagination({ count }: { count: number }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));

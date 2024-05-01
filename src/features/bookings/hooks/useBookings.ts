@@ -16,11 +16,14 @@ export function useBookings() {
   const [field, direction] = sortBy.split('-');
   bookingParams.sortBy = { field, direction };
 
-  const { isLoading, data: bookings } = useQuery({
+  //PAGINATION
+  bookingParams.pagination = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
+
+  const { isLoading, data: { data: bookings, count } = {} } = useQuery({
     queryKey: ['bookings', bookingParams],
     //when the values of bookingParams changes, react-query will fetch the data
     // the queryKey Array is like the dependancy array in useEffect, if it changes, we will fetch new data
     queryFn: () => getBookings(bookingParams),
   });
-  return { isLoading, bookings };
+  return { isLoading, bookings, count };
 }
