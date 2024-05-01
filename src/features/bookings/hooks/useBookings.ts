@@ -4,12 +4,17 @@ import { BookingsParams, getBookings } from '../api/apiBookings';
 
 export function useBookings() {
   const [searchParams] = useSearchParams();
-  //Filter
+  const bookingParams: BookingsParams = {} as BookingsParams;
 
+  //Filter
   const filterValue = searchParams.get('status');
-  const bookingParams: BookingsParams =
-    !filterValue || filterValue === 'all' ? { filter: null } : { filter: { field: 'status', value: filterValue } };
-  //{ filter: { field: 'totalPrice', value: 5000, method: 'gte' } };
+  bookingParams.filter = !filterValue || filterValue === 'all' ? null : { field: 'status', value: filterValue };
+  //{ filter: { field: 'totalPrice', value: 5000, method: 'gte' } }; //how to do?
+
+  //Sorting
+  const sortBy = searchParams.get('sortBy') || 'startDate-desc';
+  const [field, direction] = sortBy.split('-');
+  bookingParams.sortBy = { field, direction };
 
   const { isLoading, data: bookings } = useQuery({
     queryKey: ['bookings', bookingParams],

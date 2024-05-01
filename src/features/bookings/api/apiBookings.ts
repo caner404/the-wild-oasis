@@ -4,18 +4,22 @@ import { Booking } from '../type/Booking';
 
 export type BookingsParams = {
   filter: { field: string; value: string | number } | null;
+  sortBy: { field: string; direction: string } | null;
 };
 
-export async function getBookings({ filter = null }: BookingsParams): Promise<Booking[]> {
+export async function getBookings({ filter = null, sortBy = null }: BookingsParams): Promise<Booking[]> {
   let query = supabase.from('Bookings').select('*,Cabins(*),Guests(*)');
   //const { data, error } = await supabase.from('Bookings').select('*,Cabins(name),Guests(fullName,email)');
 
   //FILTER
-  if (filter !== null) {
+  if (filter) {
     query = query.eq(filter.field, filter.value);
   }
 
   // SORTING
+  if (sortBy) {
+    query = query.order(sortBy.field, { ascending: sortBy.direction === 'asc' });
+  }
 
   const { data, error } = await query;
   if (error) {
