@@ -6,14 +6,14 @@ import { PAGE_SIZE } from '@/utils/constants';
 export type BookingsParams = {
   filter: { field: string; value: string | number } | null;
   sortBy: { field: string; direction: string } | null;
-  pagination: number;
+  page: number;
 };
 
 export async function getBookings({
   filter = null,
   sortBy = null,
-  pagination = 1,
-}: BookingsParams): Promise<{ data: Booking[]; count: number | null }> {
+  page = 1,
+}: BookingsParams): Promise<{ data: Booking[]; count: number }> {
   let query = supabase.from('Bookings').select('*,Cabins(*),Guests(*)', { count: 'exact' });
   //const { data, error } = await supabase.from('Bookings').select('*,Cabins(name),Guests(fullName,email)');
 
@@ -27,9 +27,9 @@ export async function getBookings({
     query = query.order(sortBy.field, { ascending: sortBy.direction === 'asc' });
   }
 
-  // Pagination
-  if (pagination) {
-    const from = (pagination - 1) * PAGE_SIZE;
+  // page
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
     query = query.range(from, to);
   }
@@ -40,7 +40,7 @@ export async function getBookings({
     throw new Error('Bookings could not be loaded');
   }
 
-  return { data, count };
+  return { data, count: !count ? 0 : count };
 }
 
 export async function getBooking(id: number) {
