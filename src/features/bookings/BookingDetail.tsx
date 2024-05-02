@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
-import { Button, ButtonVariation } from '@/ui/Button';
+import { Button, ButtonText, ButtonVariation } from '@/ui/Button';
 import ButtonGroup from '@/ui/Button/ButtonGroup';
-import ButtonText from '@/ui/Button/ButtonText';
-import { Heading, Row } from '@/ui/Layout';
-import Tag from '@/ui/Tag';
-import { useMoveBack } from '../../hooks/useMoveBack';
-import { statusToTagName } from './type/Booking';
-import { useBooking } from './hooks/useBooking';
-import { BookingDataBox } from './BookingDataBox';
-import Spinner from '@/ui/Spinner';
+
 import Empty from '@/ui/Empty';
+import { Heading, Row } from '@/ui/Layout';
+import Spinner from '@/ui/Spinner';
+import Tag from '@/ui/Tag';
+import { useNavigate } from 'react-router-dom';
+import { useMoveBack } from '../../hooks/useMoveBack';
+import { BookingDataBox } from './BookingDataBox';
+import { useBooking } from './hooks/useBooking';
+import { BookingStatus, statusToTagName } from './type/Booking';
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -20,9 +21,9 @@ const HeadingGroup = styled.div`
 
 export function BookingDetail() {
   const { isLoading, booking } = useBooking();
-  const status = 'checked-in';
 
   const moveBack = useMoveBack();
+  const navigate = useNavigate();
 
   if (!booking) return <Empty resource='booking' />;
   if (isLoading) return <Spinner />;
@@ -31,7 +32,7 @@ export function BookingDetail() {
       <Row type='horizontal'>
         <HeadingGroup>
           <Heading as='h1'>Booking #{booking.id}</Heading>
-          <Tag $type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
+          <Tag $type={statusToTagName[booking.status]}>{booking.status.replace('-', ' ')}</Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
@@ -39,6 +40,9 @@ export function BookingDetail() {
       <BookingDataBox booking={booking} />
 
       <ButtonGroup>
+        {booking.status === BookingStatus.UNCONFIRMED && (
+          <Button onClick={() => navigate(`/checkIn/${booking.id}`)}>check-in</Button>
+        )}
         <Button
           $variation={ButtonVariation.SECONDARY}
           onClick={moveBack}
