@@ -113,8 +113,8 @@ export function BookingDataBox({ booking }: { booking: Booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    guests: { fullName: guestName, email, country, countryFlag, nationalID },
-    cabins: { name: cabinName },
+    Guests: { fullName: guestName, email, nationality, countryFlag, nationalID },
+    Cabins: { name: cabinName },
   } = booking;
 
   return (
@@ -139,7 +139,7 @@ export function BookingDataBox({ booking }: { booking: Booking }) {
           {countryFlag && (
             <Flag
               src={countryFlag}
-              alt={`Flag of ${country}`}
+              alt={`Flag of ${nationality}`}
             />
           )}
           <p>

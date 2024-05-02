@@ -30,3 +30,9 @@ export enum BookingStatus {
   CHECKED_IN = 'checked-in',
   CHECKED_OUT = 'checked-out',
 }
+
+export const statusToTagName: { [key in BookingStatus]: string } = {
+  [BookingStatus.UNCONFIRMED]: 'blue',
+  [BookingStatus.CHECKED_IN]: 'green',
+  [BookingStatus.CHECKED_OUT]: 'silver',
+};
