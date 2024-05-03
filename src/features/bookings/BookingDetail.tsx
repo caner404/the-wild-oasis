@@ -13,6 +13,9 @@ import { BookingDataBox } from './BookingDataBox';
 import { useBooking } from './hooks/useBooking';
 import { BookingStatus, statusToTagName } from './type/Booking';
 import { useCheckOut } from '@/features/check-in-out';
+import { useDeleteBooking } from './hooks/useDeleteBooking';
+import Modal from '@/ui/Modal';
+import ConfirmDelete from '@/ui/ConfirmDelete';
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -23,6 +26,7 @@ const HeadingGroup = styled.div`
 export function BookingDetail() {
   const { isLoading, booking } = useBooking();
   const { checkout, isCheckout } = useCheckOut();
+  const { isDeleting, deleteBooking } = useDeleteBooking();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
@@ -62,6 +66,19 @@ export function BookingDetail() {
         >
           Back
         </Button>
+
+        <Modal.Root>
+          <Modal.Open opens='bookingDetailsDelete'>
+            <Button $variation={ButtonVariation.DANGER}>Delete</Button>
+          </Modal.Open>
+          <Modal.Window name='bookingDetailsDelete'>
+            <ConfirmDelete
+              resourceName='booking'
+              disabled={isDeleting}
+              onConfirm={() => deleteBooking(booking.id)}
+            />
+          </Modal.Window>
+        </Modal.Root>
       </ButtonGroup>
     </>
   );

@@ -1,7 +1,5 @@
+import { Heading, Row } from '@/ui/Layout';
 import styled from 'styled-components';
-
-import Heading from '../../ui/Layout/Heading';
-import Row from '../../ui/Row';
 
 const StyledToday = styled.div`
   /* Box */

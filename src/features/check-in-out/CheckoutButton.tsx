@@ -1,10 +1,10 @@
-import Button from '../../ui/Button/Button';
+import { Button, ButtonSize, ButtonVariation } from '@/ui/Button';
 
-function CheckoutButton({ bookingId }) {
+function CheckoutButton({ bookingId }: { bookingId: number }) {
   return (
     <Button
-      variation='primary'
-      size='small'
+      $variation={ButtonVariation.PRIMARY}
+      $size={ButtonSize.SMALL}
     >
       Check out
     </Button>
