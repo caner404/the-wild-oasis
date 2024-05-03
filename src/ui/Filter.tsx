@@ -46,6 +46,8 @@ function Filter({ filterField, options }: FilterProps) {
 
   function handleClick(value: string) {
     searchParams.set(filterField, value);
+    // reset to page 1 when we switch filters
+    if (searchParams.get('page')) searchParams.set('page', '1');
     setSearchParams(searchParams);
   }
   return (

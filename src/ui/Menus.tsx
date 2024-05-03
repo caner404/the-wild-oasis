@@ -116,9 +116,10 @@ function List({ children, id }: PropsWithChildren<{ id: number }>) {
 
 interface ButtonProps {
   icon: React.ReactNode;
+  disabled?: boolean;
   onClick?: () => void;
 }
-function Button({ children, icon, onClick }: PropsWithChildren<ButtonProps>) {
+function Button({ children, icon, onClick, disabled }: PropsWithChildren<ButtonProps>) {
   const { close } = useMenuContext();
 
   function handleClick() {
@@ -128,7 +129,7 @@ function Button({ children, icon, onClick }: PropsWithChildren<ButtonProps>) {
 
   return (
     <li onClick={handleClick}>
-      <StyledButton>
+      <StyledButton disabled={disabled}>
         {' '}
         {icon} <span>{children}</span>
       </StyledButton>

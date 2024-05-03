@@ -12,6 +12,7 @@ import { useMoveBack } from '../../hooks/useMoveBack';
 import { BookingDataBox } from './BookingDataBox';
 import { useBooking } from './hooks/useBooking';
 import { BookingStatus, statusToTagName } from './type/Booking';
+import { useCheckOut } from '@/features/check-in-out';
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ const HeadingGroup = styled.div`
 
 export function BookingDetail() {
   const { isLoading, booking } = useBooking();
+  const { checkout, isCheckout } = useCheckOut();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
@@ -42,6 +44,17 @@ export function BookingDetail() {
       <ButtonGroup>
         {booking.status === BookingStatus.UNCONFIRMED && (
           <Button onClick={() => navigate(`/checkIn/${booking.id}`)}>check-in</Button>
+        )}
+
+        {booking.status === BookingStatus.CHECKED_IN && (
+          <Button
+            disabled={isCheckout}
+            onClick={() => {
+              checkout(booking.id);
+            }}
+          >
+            check-out
+          </Button>
         )}
         <Button
           $variation={ButtonVariation.SECONDARY}
