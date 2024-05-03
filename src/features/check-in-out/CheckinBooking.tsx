@@ -7,13 +7,14 @@ import Checkbox from '@/ui/Form/Checkbox';
 import { Heading, Row } from '@/ui/Layout';
 import Spinner from '@/ui/Spinner';
 import { useEffect, useState } from 'react';
-import { useMoveBack } from '../../hooks/useMoveBack';
+
 import { BookingDataBox } from '../bookings/BookingDataBox';
 import { useBooking } from '../bookings/hooks/useBooking';
 import { formatCurrency } from '@/utils/helpers';
 import { useCheckingIn } from './hooks/useCheckIn';
 import { useSettings } from '../settings/hooks/useSettings';
 import { Setting } from '../settings/type/Setting';
+import { useMoveBack } from '@/hooks';
 
 const Box = styled.div`
   /* Box */
@@ -42,7 +43,7 @@ function CheckinBooking() {
     hasBreakfast,
     numGuests,
     numNights,
-    Guests: { fullName },
+    guests: { fullName },
   } = booking;
 
   const optionalBreakfast = settings.breakfastPrice * numNights * numGuests;

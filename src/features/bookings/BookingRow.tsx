@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import Tag from '@/ui/Tag';
 import Table from '@/ui/table/Table';
-import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 
 import { useDeleteBooking } from '@/features/bookings';
 import { useCheckOut } from '@/features/check-in-out';
@@ -14,6 +13,7 @@ import { HiTrash } from 'react-icons/hi';
 import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import { Booking, BookingStatus, statusToTagName } from './type/Booking';
+import { formatCurrency, formatDistanceFromNow } from '@/utils';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
