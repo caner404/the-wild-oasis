@@ -16,34 +16,34 @@ import { Button } from './Button';
 // };
 
 async function deleteGuests() {
-  const { error } = await supabase.from('Guests').delete().gt('id', 0);
+  const { error } = await supabase.from('guests').delete().gt('id', 0);
   if (error) console.log(error.message);
 }
 
 async function deleteCabins() {
-  const { error } = await supabase.from('Cabins').delete().gt('id', 0);
+  const { error } = await supabase.from('cabins').delete().gt('id', 0);
   if (error) console.log(error.message);
 }
 
 async function deleteBookings() {
-  const { error } = await supabase.from('Bookings').delete().gt('id', 0);
+  const { error } = await supabase.from('bookings').delete().gt('id', 0);
   if (error) console.log(error.message);
 }
 
 async function createGuests() {
-  const { error } = await supabase.from('Guests').insert(guests);
+  const { error } = await supabase.from('guests').insert(guests);
   if (error) console.log(error.message);
 }
 
 async function createCabins() {
-  const { error } = await supabase.from('Cabins').insert(cabins);
+  const { error } = await supabase.from('cabins').insert(cabins);
   if (error) console.log(error.message);
 }
 
 async function createBookings() {
   // Bookings need a guestId and a cabinId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and cabinIds, and then replace the original IDs in the booking data with the actual ones from the DB
-  const { data: guestsIds } = await supabase.from('Guests').select('id').order('id');
-  const { data: cabinsIds } = await supabase.from('Cabins').select('id').order('id');
+  const { data: guestsIds } = await supabase.from('guests').select('id').order('id');
+  const { data: cabinsIds } = await supabase.from('cabins').select('id').order('id');
 
   if (guestsIds === null || cabinsIds === null) return;
   const allGuestIds = guestsIds.map((cabin) => cabin.id);
@@ -91,7 +91,7 @@ async function createBookings() {
   console.log('---- Final Bookings -----');
   console.log(finalBookings);
 
-  const { error } = await supabase.from('Bookings').insert(finalBookings);
+  const { error } = await supabase.from('bookings').insert(finalBookings);
   if (error) console.log(error.message);
 }
 

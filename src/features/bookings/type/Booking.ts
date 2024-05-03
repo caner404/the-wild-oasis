@@ -17,8 +17,8 @@ export type Booking = {
   observations: string;
   cabinId: number;
   guestId: number;
-  Cabins: Cabin;
-  Guests: Guest;
+  cabins: Cabin;
+  guests: Guest;
 };
 
 //Cabins und Guests sind großgeschriebe, weil die Supabase Tabellen auch so geschrieben sind

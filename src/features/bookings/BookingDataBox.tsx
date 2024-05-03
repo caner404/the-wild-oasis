@@ -113,8 +113,8 @@ export function BookingDataBox({ booking }: { booking: Booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    Guests: { fullName: guestName, email, nationality, countryFlag, nationalID },
-    Cabins: { name: cabinName },
+    guests: { fullName: guestName, email, nationality, countryFlag, nationalID },
+    cabins: { name: cabinName },
   } = booking;
 
   return (

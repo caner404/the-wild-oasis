@@ -5,15 +5,15 @@ import Tag from '@/ui/Tag';
 import Table from '@/ui/table/Table';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 
+import { useDeleteBooking } from '@/features/bookings';
+import { useCheckOut } from '@/features/check-in-out';
+import ConfirmDelete from '@/ui/ConfirmDelete';
 import Menus from '@/ui/Menus';
+import Modal from '@/ui/Modal';
+import { HiTrash } from 'react-icons/hi';
 import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import { Booking, BookingStatus, statusToTagName } from './type/Booking';
-import { useCheckOut } from '@/features/check-in-out';
-import { HiTrash } from 'react-icons/hi';
-import { useDeleteBooking } from './hooks/useDeleteBooking';
-import Modal from '@/ui/Modal';
-import ConfirmDelete from '@/ui/ConfirmDelete';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -50,8 +50,8 @@ export function BookingRow({
     numNights,
     totalPrice,
     status,
-    Guests: { fullName: guestName, email },
-    Cabins: { name: cabinName },
+    guests: { fullName: guestName, email },
+    cabins: { name: cabinName },
   },
 }: {
   booking: Booking;

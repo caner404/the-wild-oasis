@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import { Button, ButtonText, ButtonVariation } from '@/ui/Button';
 import ButtonGroup from '@/ui/Button/ButtonGroup';
 
+import { useDeleteBooking } from '@/features/bookings';
+import { useCheckOut } from '@/features/check-in-out';
+import ConfirmDelete from '@/ui/ConfirmDelete';
 import Empty from '@/ui/Empty';
 import { Heading, Row } from '@/ui/Layout';
+import Modal from '@/ui/Modal';
 import Spinner from '@/ui/Spinner';
 import Tag from '@/ui/Tag';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +16,6 @@ import { useMoveBack } from '../../hooks/useMoveBack';
 import { BookingDataBox } from './BookingDataBox';
 import { useBooking } from './hooks/useBooking';
 import { BookingStatus, statusToTagName } from './type/Booking';
-import { useCheckOut } from '@/features/check-in-out';
-import { useDeleteBooking } from './hooks/useDeleteBooking';
-import Modal from '@/ui/Modal';
-import ConfirmDelete from '@/ui/ConfirmDelete';
 
 const HeadingGroup = styled.div`
   display: flex;
