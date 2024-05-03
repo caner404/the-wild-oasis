@@ -27,9 +27,8 @@ export function BookingDetail() {
   const { isLoading, booking } = useBooking();
   const { checkout, isCheckout } = useCheckOut();
   const { isDeleting, deleteBooking } = useDeleteBooking();
-
-  const moveBack = useMoveBack();
   const navigate = useNavigate();
+  const moveBack = useMoveBack();
 
   if (!booking) return <Empty resource='booking' />;
   if (isLoading) return <Spinner />;
@@ -75,7 +74,10 @@ export function BookingDetail() {
             <ConfirmDelete
               resourceName='booking'
               disabled={isDeleting}
-              onConfirm={() => deleteBooking(booking.id)}
+              onConfirm={() => {
+                deleteBooking(booking.id);
+                navigate('/bookings');
+              }}
             />
           </Modal.Window>
         </Modal.Root>

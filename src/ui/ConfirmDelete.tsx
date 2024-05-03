@@ -33,19 +33,19 @@ function ConfirmDelete({
 }) {
   return (
     <StyledConfirmDelete>
-      <Heading as='h3'>Delete {resourceName}</Heading>
+      <Heading as='h2'>Delete {resourceName}</Heading>
       <p>Are you sure you want to delete this {resourceName} permanently? This action cannot be undone.</p>
 
       <div>
         <Button
-          variation={ButtonVariation.SECONDARY}
+          $variation={ButtonVariation.SECONDARY}
           disabled={disabled}
           onClick={onClose}
         >
           Cancel
         </Button>
         <Button
-          variation={ButtonVariation.DANGER}
+          $variation={ButtonVariation.DANGER}
           disabled={disabled}
           onClick={onConfirm}
         >
