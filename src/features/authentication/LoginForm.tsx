@@ -12,7 +12,15 @@ export function LoginForm() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || !password) return;
-    login({ email, password });
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail('');
+          setPassword('');
+        },
+      }
+    );
   }
   return (
     <Form onSubmit={handleSubmit}>
