@@ -1,8 +1,9 @@
-import Button from '@/ui';
+import { Button, ButtonVariation } from '@/ui/Button';
+import { Form, FormRow, Input } from '@/ui/Form';
 
 // Email regex: /\S+@\S+\.\S+/
 
-function SignupForm() {
+export function SignupForm() {
   return (
     <Form>
       <FormRow
@@ -48,7 +49,7 @@ function SignupForm() {
       <FormRow>
         {/* type is an HTML attribute! */}
         <Button
-          variation='secondary'
+          $variation={ButtonVariation.SECONDARY}
           type='reset'
         >
           Cancel

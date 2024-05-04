@@ -1,14 +1,10 @@
 import { useState } from 'react';
 
-import Button from '../../../ui/Button/Button';
-import FileInput from '../../../ui/Form/FileInput';
-import Form from '../../../ui/Form/Form';
-import FormRow from '../../ui/FormRow';
-import Input from '../../ui/Input';
+import { useUser } from './hooks/useUser';
+import { FileInput, Form, FormRow, Input } from '@/ui/Form';
+import { Button, ButtonVariation } from '@/ui/Button';
 
-import { useUser } from './useUser';
-
-function UpdateUserDataForm() {
+export function UpdateUserDataForm() {
   // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
   const {
     user: {
@@ -18,9 +14,9 @@ function UpdateUserDataForm() {
   } = useUser();
 
   const [fullName, setFullName] = useState(currentFullName);
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState({} as File);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
@@ -44,13 +40,13 @@ function UpdateUserDataForm() {
         <FileInput
           id='avatar'
           accept='image/*'
-          onChange={(e) => setAvatar(e.target.files[0])}
+          onChange={(e) => (e.target.files ? setAvatar(e.target.files[0]) : {})}
         />
       </FormRow>
       <FormRow>
         <Button
           type='reset'
-          variation='secondary'
+          $variation={ButtonVariation.SECONDARY}
         >
           Cancel
         </Button>
@@ -59,5 +55,3 @@ function UpdateUserDataForm() {
     </Form>
   );
 }
-
-export default UpdateUserDataForm;
