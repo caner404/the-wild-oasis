@@ -11,7 +11,7 @@ export function useLogin() {
     onSuccess: (user) => {
       // set data into react query cache,
       query.setQueryData(['user'], user.user);
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     },
     onError: (err: Error) => {
       console.log(err);

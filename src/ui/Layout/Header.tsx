@@ -1,3 +1,4 @@
+import { Logout } from '@/features/authentication';
 import styled from 'styled-components';
 
 const StlyledHeader = styled.header`
@@ -7,5 +8,9 @@ const StlyledHeader = styled.header`
 `;
 
 export function Header() {
-  return <StlyledHeader>Header</StlyledHeader>;
+  return (
+    <StlyledHeader>
+      <Logout />
+    </StlyledHeader>
+  );
 }
