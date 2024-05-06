@@ -93,6 +93,7 @@ export function SignupForm() {
           $variation={ButtonVariation.SECONDARY}
           type='reset'
           disabled={isLoading}
+          onClick={() => reset()}
         >
           Cancel
         </Button>

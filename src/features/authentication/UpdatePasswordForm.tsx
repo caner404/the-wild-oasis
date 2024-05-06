@@ -9,14 +9,14 @@ type SubmitData = {
   passwordConfirm: string;
 };
 
-function UpdatePasswordForm() {
+export function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm<SubmitData>();
   const { errors } = formState;
 
-  const { updateUser, isUpdating } = useUpdateUser();
+  const { updateCurrentUser, isUpdating } = useUpdateUser();
 
   function onSubmit({ password }: SubmitData) {
-    updateUser({ password }, { onSuccess: reset });
+    updateCurrentUser({ password }, { onSuccess: () => reset() });
   }
 
   return (
@@ -68,5 +68,3 @@ function UpdatePasswordForm() {
     </Form>
   );
 }
-
-export default UpdatePasswordForm;

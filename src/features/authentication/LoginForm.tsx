@@ -50,7 +50,7 @@ export function LoginForm() {
           $size={ButtonSize.LARGE}
           disabled={isLoading}
         >
-          {!isLoading ? 'Lo in ' : <SpinnerMini />}
+          {!isLoading ? 'Log in ' : <SpinnerMini />}
         </Button>
       </FormRowVertical>
     </Form>

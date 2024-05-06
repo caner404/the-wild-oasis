@@ -1,5 +1,4 @@
 import { LoginForm } from '@/features/authentication';
-import { CabinTable } from '@/features/cabins';
 import { Heading } from '@/ui/Layout';
 import Logo from '@/ui/Logo';
 import styled from 'styled-components';
@@ -25,7 +24,6 @@ function Login() {
         Log in to your account
       </Heading>
       <LoginForm />
-      <CabinTable />
     </LoginLayout>
   );
 }

@@ -4,7 +4,7 @@ import { Heading } from '@/ui/Layout';
 function NewUsers() {
   return (
     <>
-      <Heading as='h1'>Create a new user</Heading>;
+      <Heading as='h1'>Create a new user</Heading>
       <SignupForm />
     </>
   );
