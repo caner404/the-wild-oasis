@@ -30,7 +30,7 @@ export function CabinTable() {
   const fieldKey: CabinKey = field as CabinKey;
   const sortedCabins = filteredCabins.sort((a, b) => (Number(a[fieldKey]) - Number(b[fieldKey])) * modifier);
 
-  if (cabins === undefined || !cabins.length) return <Empty resource='bookings' />;
+  if (cabins === undefined || !cabins.length) return <Empty resource='cabins' />;
   return (
     <Menus.Root>
       <Table.Root columns=' 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr'>

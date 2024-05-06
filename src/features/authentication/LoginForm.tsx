@@ -1,8 +1,8 @@
 import { Button, ButtonSize } from '@/ui/Button';
 import { Form, FormRowVertical, Input } from '@/ui/Form';
+import SpinnerMini from '@/ui/SpinnerMini';
 import { useState } from 'react';
 import { useLogin } from './hooks/useLogin';
-import SpinnerMini from '@/ui/SpinnerMini';
 
 export function LoginForm() {
   const [email, setEmail] = useState('caner@example.com');
