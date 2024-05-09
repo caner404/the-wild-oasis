@@ -1,4 +1,4 @@
-import { Cabin } from '@/features/cabins/type/Cabin';
+import { Cabin } from '@/features/cabins';
 import { Guest } from './Guest';
 
 export type Booking = {

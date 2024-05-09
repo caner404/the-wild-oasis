@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { useRecentBookings } from './hooks/useRecentBookings';
 import Spinner from '@/ui/Spinner';
 import { useRecentStays } from './hooks';
+import { Stats } from './Stats';
+import Empty from '@/ui/Empty';
+import { useCabins } from '../cabins/hooks';
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -11,14 +14,26 @@ const StyledDashboardLayout = styled.div`
 `;
 
 export function DashboardLayout() {
-  const { bookings, isLoading: isLoadingRecentBookings } = useRecentBookings();
+  const { bookings, isLoading: isLoadingRecentBookings, numDays } = useRecentBookings();
   const { stays, confirmedStays, isLoading: isLoadingRecentStays } = useRecentStays();
+  const { cabins, isLoading: isLoadingCabins } = useCabins();
 
-  if (isLoadingRecentBookings || isLoadingRecentStays) return <Spinner />;
+  if (isLoadingRecentBookings || isLoadingRecentStays || isLoadingCabins) return <Spinner />;
+
+  if (!bookings || !stays || !confirmedStays) return <Empty resource='bookings' />;
+  if (!stays || !confirmedStays) return <Empty resource='stays' />;
+  if (!cabins) return <Empty resource='cabins' />;
 
   return (
     <>
-      <StyledDashboardLayout></StyledDashboardLayout>
+      <StyledDashboardLayout>
+        <Stats
+          bookings={bookings}
+          confirmedStays={confirmedStays}
+          numDays={numDays}
+          cabinCount={cabins?.length}
+        />
+      </StyledDashboardLayout>
     </>
   );
 }
