@@ -5,6 +5,7 @@ import { useRecentStays } from './hooks';
 import { Stats } from './Stats';
 import Empty from '@/ui/Empty';
 import { useCabins } from '../cabins/hooks';
+import { SalesChart } from './SalesChart';
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -14,13 +15,13 @@ const StyledDashboardLayout = styled.div`
 `;
 
 export function DashboardLayout() {
-  const { bookings, isLoading: isLoadingRecentBookings, numDays } = useRecentBookings();
+  const { bookings: recentBookings, isLoading: isLoadingRecentBookings, numDays } = useRecentBookings();
   const { stays, confirmedStays, isLoading: isLoadingRecentStays } = useRecentStays();
   const { cabins, isLoading: isLoadingCabins } = useCabins();
 
   if (isLoadingRecentBookings || isLoadingRecentStays || isLoadingCabins) return <Spinner />;
 
-  if (!bookings || !stays || !confirmedStays) return <Empty resource='bookings' />;
+  if (!recentBookings || !stays || !confirmedStays) return <Empty resource='bookings' />;
   if (!stays || !confirmedStays) return <Empty resource='stays' />;
   if (!cabins) return <Empty resource='cabins' />;
 
@@ -28,10 +29,14 @@ export function DashboardLayout() {
     <>
       <StyledDashboardLayout>
         <Stats
-          bookings={bookings}
+          bookings={recentBookings}
           confirmedStays={confirmedStays}
           numDays={numDays}
           cabinCount={cabins?.length}
+        />
+        <SalesChart
+          bookings={recentBookings}
+          numDays={numDays}
         />
       </StyledDashboardLayout>
     </>

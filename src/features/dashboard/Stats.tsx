@@ -13,7 +13,6 @@ export function Stats({ bookings, confirmedStays, numDays, cabinCount }: StatsPr
   const numBookings = bookings.length;
   const checkins = confirmedStays.length;
   const sales = bookings.filter((booking) => booking.isPaid).reduce((acc, cur) => acc + cur.totalPrice, 0);
-
   const occupationRate = confirmedStays.reduce((acc, curr) => acc + curr.numNights, 0) / (numDays * cabinCount);
 
   return (
