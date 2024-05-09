@@ -1,4 +1,4 @@
-import { Cabin } from '@/features/cabins/type/Cabin';
+import { Cabin } from '@/features/cabins';
 import { supabaseUrl } from '../services/supabase';
 
 const imageUrl = `${supabaseUrl}/storage/v1/object/public/cabin-images/`;

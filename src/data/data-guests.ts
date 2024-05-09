@@ -1,6 +1,6 @@
 // Search for: 'jo', 'fa', 'mar', 'emm', 'ah'
 
-import { Guest } from '@/features/bookings/type/Guest';
+import { Guest } from '@/features/bookings';
 
 export const guests: Partial<Guest>[] = [
   {

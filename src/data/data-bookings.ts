@@ -1,4 +1,4 @@
-import { Booking } from '@/features/bookings/type/Booking';
+import { Booking } from '@/features/bookings';
 import { add } from 'date-fns';
 
 function fromToday(numDays: number, withTime = false) {

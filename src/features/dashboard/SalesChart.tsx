@@ -4,6 +4,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import { useDarkMode } from '@/context';
 import { Booking } from '../bookings';
 import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
+import { Heading } from '@/ui/Layout';
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
@@ -51,6 +52,9 @@ export function SalesChart({ bookings, numDays }: { bookings: Booking[]; numDays
 
   return (
     <StyledSalesChart>
+      <Heading as='h2'>
+        Sales from {format(allDates.at(0)!, 'MMM dd yyyy')} &mdash; {format(allDates.at(-1)!, 'MMM dd yyyy')}
+      </Heading>
       <ResponsiveContainer
         width='100%'
         height='100%'
