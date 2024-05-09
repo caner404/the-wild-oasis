@@ -71,10 +71,9 @@ export async function getBookingsAfterDate(date: string) {
 }
 
 // Returns all STAYS that are were created after the given date
-export async function getStaysAfterDate(date: string) {
+export async function getStaysAfterDate(date: string): Promise<Booking[]> {
   const { data, error } = await supabase
     .from('bookings')
-    // .select('*')
     .select('*, guests(fullName)')
     .gte('startDate', date)
     .lte('startDate', getToday());
