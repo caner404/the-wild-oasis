@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { Heading } from './Layout';
+import GlobalStyles from '@/styles/GlobalStlyes';
+import { Button, ButtonSize } from './Button';
 
 const StyledErrorFallback = styled.main`
   height: 100vh;
@@ -24,8 +27,31 @@ const Box = styled.div`
   }
 
   & p {
-    font-family: "Sono";
+    font-family: 'Sono';
     margin-bottom: 3.2rem;
     color: var(--color-grey-500);
   }
 `;
+
+// ErrorFallback for ReactErrorBoundary
+// this will only display when we have an error in react rendering
+export function ErrorFallback({ error, resetErrorBoundary }: { error: Error; resetErrorBoundary: () => void }) {
+  return (
+    <>
+      <GlobalStyles>
+        <StyledErrorFallback>
+          <Box>
+            <Heading as='h1'>Something went wrong</Heading>
+            <p>{error.message}</p>
+            <Button
+              $size={ButtonSize.SMALL}
+              onClick={resetErrorBoundary}
+            >
+              Try again
+            </Button>
+          </Box>
+        </StyledErrorFallback>
+      </GlobalStyles>
+    </>
+  );
+}
