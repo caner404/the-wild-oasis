@@ -1,4 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { Booking, BookingStatus } from '../bookings';
+import Tag from '@/ui/Tag';
+import { Flag } from '@/ui/Flag';
+import { Button, ButtonSize, ButtonVariation } from '@/ui/Button';
+import { Link } from 'react-router-dom';
+import CheckoutButton from './CheckoutButton';
 
 const StyledTodayItem = styled.li`
   display: grid;
@@ -18,3 +24,30 @@ const StyledTodayItem = styled.li`
 const Guest = styled.div`
   font-weight: 500;
 `;
+
+export function TodayItem({ activity }: { activity: Booking }) {
+  const { status, guests, numNights, id } = activity;
+  return (
+    <StyledTodayItem>
+      {status === BookingStatus.UNCONFIRMED && <Tag $type='green'>Arriving</Tag>}
+      {status === BookingStatus.CHECKED_IN && <Tag $type='blue'>Departing</Tag>}
+      <Flag
+        src={guests.countryFlag}
+        alt={` Flag of ${guests.nationality}`}
+      />
+      <Guest>{guests.fullName}</Guest>
+      <div>{numNights} nights</div>
+      {status === BookingStatus.UNCONFIRMED && (
+        <Button
+          $variation={ButtonVariation.PRIMARY}
+          $size={ButtonSize.SMALL}
+          as={Link}
+          to={`/checkIn/${id}`}
+        >
+          check in
+        </Button>
+      )}
+      {status === BookingStatus.CHECKED_IN && <CheckoutButton bookingId={id} />}
+    </StyledTodayItem>
+  );
+}
