@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useLogin } from './hooks/useLogin';
 
 export function LoginForm() {
-  const [email, setEmail] = useState('caner@example.com');
-  const [password, setPassword] = useState('caner_1996');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
