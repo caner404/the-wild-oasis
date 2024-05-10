@@ -60,7 +60,7 @@ async function createBookings() {
       console.log('cabin undefined');
       return;
     }
-    const numNights = subtractDates(booking.endDate, booking.startDate);
+    const numNights = subtractDates(booking.endDate!, booking.startDate!);
     const cabinPrice = numNights * (cabin.regularPrice! - cabin.discount!);
     const extrasPrice = booking.hasBreakfast ? numNights * 15 * booking.numGuests! : 0; // hardcoded breakfast price
     const totalPrice = cabinPrice + extrasPrice;
