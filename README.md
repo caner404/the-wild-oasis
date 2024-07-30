@@ -12,34 +12,51 @@
 
 
 <div align="center">
+  
+<h1 align="center">The wild oasis</h1>
 
-  <img src="./public/logo-dark.png" alt="logo" width="90" height="auto">
-
-  <h2>The Wild Oasis</h2>
-
-  <div align="center">
-    •
-    <a href="https://github.com/CodePapa360/The-Wild-Oasis/issues">Report Bug</a>
-    •
-    <a href="https://github.com/CodePapa360/The-Wild-Oasis/pulls">Request Feature</a>
-  </div>
-
-  <hr>
-
+  <p align="center">
+     The Wild Oasis hotel management app is a full-featured React web application that allows hotel employees to manage cabins, bookings, and guests. The app uses Supabase for its backend and implements a variety of advanced React techniques, such as HOCs, the Compound Component Pattern, and React Query.
+    <br />
+    <a href="https://github.com/caner404/the-wild-oasis"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://caner404.github.io/the-wild-oasis/" target='_blank'>View Demo</a>
+    ·
+    <a href="https://github.com/caner404/the-wild-oasis/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/caner404/the-wild-oasis/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
 </div>
 
-<!-- Badges -->
-<div align="center">
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-<img src="https://img.shields.io/badge/Status-Completed-success?style=flat" alt="Status" />
-</div>
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-<!-- Brief -->
-<p align="center">
-The Wild Oasis hotel management app is a full-featured React web application that allows hotel employees to manage cabins, bookings, and guests. The app uses Supabase for its backend and implements a variety of advanced React techniques, such as HOCs, the Compound Component Pattern, and React Query.
-</p>
 
-<!-- Screenshot -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built with
 
@@ -52,12 +69,22 @@ The Wild Oasis hotel management app is a full-featured React web application tha
 - [![Vite](https://img.shields.io/badge/vite-%23646CFF?style=for-the-badge&logo=vite&logoColor=yellow)](https://vitejs.dev/)
 
 
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Prerequisites
+
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
 ### Installation
 
 - Clone this repo:
 
 ```sh
-git clone https://github.com/CodePapa360/The-Wild-Oasis.git
+git clone https://github.com/caner404/the-wild-oasis.git
 ```
 
 - Install dependencies:
@@ -78,7 +105,13 @@ npm run build
 npm run dev
 ```
 
-### Author
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Contact
 
 - LinkedIn - [@caner404](https://www.linkedin.com/in/caner-iskenderoglu-6b8a8a304/)
 - Frontend Mentor - [@caner404](https://www.frontendmentor.io/profile/caner404)
