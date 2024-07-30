@@ -135,7 +135,7 @@ This app was developed as part of the [Udemy course](https://www.udemy.com/cours
 [stars-url]: https://github.com/caner404/the-wild-oasis/stargazers
 [issues-shield]: https://img.shields.io/github/issues/caner404/the-wild-oasis.svg?style=for-the-badge
 [issues-url]: https://github.com/caner404/the-wild-oasis/issues
-[license-shield]: https://img.shields.io/github/license/caner404/the-wild-oasis.svg?label=license&style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/caner404/the-wild-oasis.svg?&style=for-the-badge
 [license-url]: https://github.com/caner404/the-wild-oasis/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
