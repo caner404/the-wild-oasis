@@ -138,4 +138,4 @@ This app was developed as part of the [Udemy course](https://www.udemy.com/cours
 [license-shield]: https://img.shields.io/github/license/caner404/the-wild-oasis.svg?&style=for-the-badge
 [license-url]: https://github.com/caner404/the-wild-oasis/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://www.linkedin.com/in/caner-iskenderoglu
