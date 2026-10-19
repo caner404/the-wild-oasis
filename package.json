@@ -15,7 +15,7 @@
     "@tanstack/react-query-devtools": "^5.104.1",
     "date-fns": "^4.4.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "react-dom": "^19.3.1",
     "react-error-boundary": "^6.1.5",
     "react-hook-form": "^7.88.0",
     "react-hot-toast": "^2.6.1",
